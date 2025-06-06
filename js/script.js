@@ -15,7 +15,7 @@ function toggleMenu() {
     // Trigger reflow
     void link.offsetWidth;
     if (isMenuOpen) {
-      link.style.animation = `fadeIn 0.3s ease forwards ${index * 0.1}s`;
+      link.style.animation = `fadeIn 0.5s ease forwards ${index * 0.2}s`;
     }
   });
 }
@@ -129,6 +129,82 @@ function handleFormSubmit(e, formType) {
   const originalText = submitBtn.textContent;
   submitBtn.textContent = "Mengirim...";
   submitBtn.disabled = true;
+
+  // Jika ini adalah form pemesanan, kirim ke Discord webhook
+  if (formType === "order") {
+    const formData = new FormData(e.target);
+    const orderData = {
+      nama: formData.get("nama"),
+      email: formData.get("email"),
+      telepon: formData.get("telepon"),
+      layanan: formData.get("layanan"),
+      pesan: formData.get("pesan")
+    };
+
+    // Kirim ke Discord webhook
+    const webhookUrl = "https://canary.discord.com/api/webhooks/1380601444968697865/C1xNIyW6W0ecAsNm5uUNtSLV1ukNfmI8ZX9JmuC3ptd-Cn_9M8iMa3xz3J6OChXNN3SM";
+    const discordMessage = {
+      username: "Elektrobee Bot",
+      avatar_url: "https://i.imgur.com/4M34hi2.png",
+      embeds: [{
+        title: "🛠️ Pesanan Baru!",
+        color: 3447003,
+        fields: [
+          {
+            name: "Nama Perusahaan",
+            value: formData.get("nama") || "Tidak diisi",
+            inline: true
+          },
+          {
+            name: "Nama Penanggung Jawab",
+            value: formData.get("nama_pj") || "Tidak diisi",
+            inline: true
+          },
+          {
+            name: "Email",
+            value: formData.get("email") || "Tidak diisi",
+            inline: true
+          },
+          {
+            name: "Telepon",
+            value: formData.get("telepon") || "Tidak diisi",
+            inline: true
+          },
+          {
+            name: "Layanan",
+            value: formData.get("layanan") || "Tidak diisi",
+            inline: true
+          },
+          {
+            name: "Deskripsi Kebutuhan",
+            value: formData.get("pesan") || "Tidak ada deskripsi tambahan"
+          }
+        ],
+        timestamp: new Date().toISOString(),
+        footer: {
+          text: "Elektrobee - Jasa Kelistrikan Profesional"
+        }
+      }]
+    };
+
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(discordMessage)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .catch(error => {
+      console.error("Error mengirim ke Discord:", error);
+      // Tetap lanjutkan proses form meskipun gagal mengirim ke Discord
+    });
+  }
 
   setTimeout(() => {
     alert(
@@ -250,4 +326,143 @@ document.addEventListener("keydown", (e) => {
       document.body.style.overflow = "auto";
     }
   }
+});
+
+// Gallery Slider Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const sliders = document.querySelectorAll('.gallery-slider');
+  
+  sliders.forEach(slider => {
+    const grid = slider.querySelector('.gallery-grid');
+    const prevBtn = slider.querySelector('.prev-btn');
+    const nextBtn = slider.querySelector('.next-btn');
+    const items = slider.querySelectorAll('.gallery-item');
+    
+    let currentPosition = 0;
+    const itemWidth = items[0].offsetWidth + 20; // Including gap
+    let itemsPerView = window.innerWidth > 768 ? 3 : window.innerWidth > 480 ? 2 : 1;
+    let maxPosition = -(items.length - itemsPerView) * itemWidth;
+    let isAnimating = false;
+    
+    function updateSlider() {
+      if (isAnimating) return;
+      isAnimating = true;
+      
+      grid.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      grid.style.transform = `translateX(${currentPosition}px)`;
+      
+      items.forEach((item, index) => {
+        const itemPosition = index * itemWidth + currentPosition;
+        const isVisible = itemPosition >= -itemWidth && itemPosition <= window.innerWidth;
+        
+        if (isVisible) {
+          item.classList.add('active');
+          item.classList.add('slide-in');
+          item.classList.remove('slide-out');
+        } else {
+          item.classList.remove('active');
+          if (itemPosition < -itemWidth) {
+            item.classList.add('slide-out');
+            item.classList.remove('slide-in');
+          }
+        }
+      });
+      
+      prevBtn.style.opacity = items.length <= itemsPerView ? '0.5' : '1';
+      nextBtn.style.opacity = items.length <= itemsPerView ? '0.5' : '1';
+      
+      // Reset animating flag after transition
+      setTimeout(() => {
+        isAnimating = false;
+      }, 800);
+    }
+    
+    function slideNext() {
+      if (isAnimating) return;
+      
+      if (currentPosition > maxPosition) {
+        currentPosition = Math.max(currentPosition - itemWidth, maxPosition);
+      } else {
+        // Loop ke awal dengan animasi smooth
+        currentPosition = 0;
+      }
+      updateSlider();
+    }
+    
+    function slidePrev() {
+      if (isAnimating) return;
+      
+      if (currentPosition < 0) {
+        currentPosition = Math.min(currentPosition + itemWidth, 0);
+      } else {
+        // Loop ke akhir dengan animasi smooth
+        currentPosition = maxPosition;
+      }
+      updateSlider();
+    }
+    
+    prevBtn.addEventListener('click', slidePrev);
+    nextBtn.addEventListener('click', slideNext);
+    
+    // Auto slide setiap 3 detik
+    let autoSlideInterval = setInterval(slideNext, 3000);
+    
+    // Hentikan auto slide saat hover
+    slider.addEventListener('mouseenter', () => {
+      clearInterval(autoSlideInterval);
+    });
+    
+    // Lanjutkan auto slide saat mouse keluar
+    slider.addEventListener('mouseleave', () => {
+      autoSlideInterval = setInterval(slideNext, 2000);
+    });
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      isDragging = true;
+    });
+    
+    slider.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+      grid.style.transition = 'none';
+      grid.style.transform = `translateX(${currentPosition + diff}px)`;
+    });
+    
+    slider.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      if (touchEndX < touchStartX - swipeThreshold) {
+        slideNext();
+      } else if (touchEndX > touchStartX + swipeThreshold) {
+        slidePrev();
+      } else {
+        // Kembali ke posisi awal jika swipe tidak cukup
+        updateSlider();
+      }
+    }
+    
+    window.addEventListener('resize', () => {
+      itemsPerView = window.innerWidth > 768 ? 3 : window.innerWidth > 480 ? 2 : 1;
+      maxPosition = -(items.length - itemsPerView) * itemWidth;
+      if (currentPosition < maxPosition) {
+        currentPosition = maxPosition;
+      }
+      updateSlider();
+    });
+    
+    // Initial setup
+    updateSlider();
+  });
 });

@@ -19,6 +19,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <!-- Tambahkan Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
   </head>
   <body>
     <!-- Header -->
@@ -97,99 +99,129 @@
         <!-- Instalasi Listrik -->
         <div class="gallery-category">
           <h3>Instalasi Listrik</h3>
-          <div class="gallery-grid">
-            <div class="gallery-item">
-              <img
-                src="images/instalasi-1.jpg"
-                alt="Instalasi Listrik Industri"
-              />
-              <div class="gallery-overlay">
-                <h4>Pemasangan Instalasi Listrik Baru</h4>
-                <p>Instalasi listrik untuk rumah</p>
+          <div class="gallery-slider">
+            <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <div class="gallery-grid">
+              <div class="gallery-item">
+                <img
+                  src="images/instalasi-1.jpg"
+                  alt="Instalasi Listrik Industri"
+                />
+                <div class="gallery-overlay">
+                  <h4>Pemasangan Instalasi Listrik Baru</h4>
+                  <p>Instalasi listrik untuk rumah</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="images/instalasi-2.jpg"
+                  alt="Instalasi Listrik Komersial"
+                />
+                <div class="gallery-overlay">
+                  <h4>Perbaikan Instalasi Listrik Komersial</h4>
+                  <p>Perbaikan instalasi listrik untuk rumah tangga</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="images/instalasi-3.jpg"
+                  alt="Instalasi Listrik Residensial"
+                />
+                <div class="gallery-overlay">
+                  <h4>Instalasi Listrik Residensial</h4>
+                  <p>Instalasi listrik untuk perumahan modern</p>
+                </div>
               </div>
             </div>
-            <div class="gallery-item">
-              <img
-                src="images/instalasi-2.jpg"
-                alt="Instalasi Listrik Komersial"
-              />
-              <div class="gallery-overlay">
-                <h4>Perbaikan Instalasi Listrik Komersial</h4>
-                <p>Perbaikan instalasi listrik untuk rumah tangga</p>
-              </div>
-            </div>
-            <div class="gallery-item">
-              <img
-                src="images/instalasi-3.jpg"
-                alt="Instalasi Listrik Residensial"
-              />
-              <div class="gallery-overlay">
-                <h4>Instalasi Listrik Residensial</h4>
-                <p>Instalasi listrik untuk perumahan modern</p>
-              </div>
-            </div>
+            <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
           </div>
         </div>
 
         <!-- Panel Listrik -->
         <div class="gallery-category">
           <h3>Panel Listrik</h3>
-          <div class="gallery-grid">
-            <div class="gallery-item">
-              <img src="images/panel-1.jpg" alt="Panel Otomasi Industri" />
-              <div class="gallery-overlay">
-                <h4>Panel Otomasi Industri</h4>
-                <p>Panel listrik untuk sistem kontrol alat industri</p>
+          <div class="gallery-slider">
+            <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <div class="gallery-grid">
+              <div class="gallery-item">
+                <img src="images/panel-1.jpg" alt="Panel Otomasi Industri" />
+                <div class="gallery-overlay">
+                  <h4>Panel Otomasi Industri</h4>
+                  <p>Panel listrik untuk sistem kontrol alat industri</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="images/panel-2.jpg" alt="Panel Listrik Gedung" />
+                <div class="gallery-overlay">
+                  <h4>Panel Kapasitor Bank</h4>
+                  <p>Panel untuk memperbaiki faktor daya</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="images/panel-3.jpg" alt="Panel Listrik Rumah" />
+                <div class="gallery-overlay">
+                  <h4>Panel Distribusi</h4>
+                  <p>
+                    Panel listrik untuk membagi dan mengontrol aliran listrik dari
+                    sumber utama
+                  </p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="images/panel-4.jpg" alt="Panel Auto Transfer Switch" />
+                <div class="gallery-overlay">
+                  <h4>Panel Auto Transfer Switch</h4>
+                  <p>
+                    Panel untuk perpindahan otomatis antara sumber listrik utama dan genset
+                  </p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="images/panel-5.jpg" alt="Panel Water Level Control" />
+                <div class="gallery-overlay">
+                  <h4>Panel Water Level Control</h4>
+                  <p>
+                    Panel kontrol otomatis untuk mengatur level air pada tangki atau reservoir
+                  </p>
+                </div>
               </div>
             </div>
-            <div class="gallery-item">
-              <img src="images/panel-2.jpg" alt="Panel Listrik Gedung" />
-              <div class="gallery-overlay">
-                <h4>Panel Kapasitor Bank</h4>
-                <p>Panel untuk memperbaiki faktor daya</p>
-              </div>
-            </div>
-            <div class="gallery-item">
-              <img src="images/panel-3.jpg" alt="Panel Listrik Rumah" />
-              <div class="gallery-overlay">
-                <h4>Panel Distribusi</h4>
-                <p>
-                  Panel listrik untuk membagi dan mengontrol aliran listrik dari
-                  sumber utama
-                </p>
-              </div>
-            </div>
+            <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
           </div>
         </div>
 
         <!-- Maintenance -->
         <div class="gallery-category">
           <h3>Maintenance</h3>
-          <div class="gallery-grid">
-            <div class="gallery-item">
-              <img
-                src="images/maintenance-1.jpg"
-                alt="Maintenance Panel Listrik"
-              />
-              <div class="gallery-overlay">
-                <h4>Maintenance Panel Listrik</h4>
-                <p>Pemeliharaan berkala panel listrik</p>
+          <div class="gallery-slider">
+            <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <div class="gallery-grid">
+              <div class="gallery-item">
+                <img
+                  src="images/maintenance-1.jpg"
+                  alt="Maintenance Panel Listrik"
+                />
+                <div class="gallery-overlay">
+                  <h4>Maintenance Panel Listrik</h4>
+                  <p>Pemeliharaan berkala panel listrik</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="images/maintenance-2.jpg" alt="Perbaikan Sistem" />
+                <div class="gallery-overlay">
+                  <h4>Perbaikan Sistem</h4>
+                  <p>Perbaikan sistem kelistrikan industri</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="images/maintenance-3.jpg" alt="Pemeriksaan Rutin" />
+                <div class="gallery-overlay">
+                  <h4>Pemeriksaan Rutin</h4>
+                  <p>Pemeriksaan rutin instalasi listrik</p>
+                </div>
               </div>
             </div>
-            <div class="gallery-item">
-              <img src="images/maintenance-2.jpg" alt="Perbaikan Sistem" />
-              <div class="gallery-overlay">
-                <h4>Perbaikan Sistem</h4>
-                <p>Perbaikan sistem kelistrikan industri</p>
-              </div>
-            </div>
-            <div class="gallery-item">
-              <img src="images/maintenance-3.jpg" alt="Pemeriksaan Rutin" />
-              <div class="gallery-overlay">
-                <h4>Pemeriksaan Rutin</h4>
-                <p>Pemeriksaan rutin instalasi listrik</p>
-              </div>
-            </div>
+            <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -243,16 +275,7 @@
             <p>elektrobee1@gmail.com</p>
           </div>
           <div class="map-container">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6666666666665!2d106.33059072252344!3d-6.334798717116168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjAnMDUuMyJTIDEwNsKwMTknNTAuMSJF!5e0!3m2!1sid!2sid!4v1647881234567!5m2!1sid!2sid"
-              width="100%"
-              height="300"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            >
-            </iframe>
+            <div id="map" style="width: 100%; height: 300px;"></div>
           </div>
         </div>
         <div class="contact-form">
@@ -272,18 +295,18 @@
       <h2>Formulir Pemesanan</h2>
       <div class="order-form">
         <form id="orderForm">
-          <input type="text" placeholder="Nama Perusahaan" required />
-          <input type="text" placeholder="Nama Penanggung Jawab" required />
-          <input type="email" placeholder="Email Perusahaan" required />
-          <input type="tel" placeholder="Nomor Telepon" required />
-          <select required>
+          <input type="text" name="nama" placeholder="Nama Perusahaan" required />
+          <input type="text" name="nama_pj" placeholder="Nama Penanggung Jawab" required />
+          <input type="email" name="email" placeholder="Email Perusahaan" required />
+          <input type="tel" name="telepon" placeholder="Nomor Telepon" required />
+          <select name="layanan" required>
             <option value="">Pilih Layanan</option>
             <option value="instalasi">Instalasi Listrik</option>
             <option value="panel">Perakitan Panel Listrik</option>
             <option value="maintenance">Maintenance</option>
             <option value="konsultasi">Konsultasi</option>
           </select>
-          <textarea placeholder="Deskripsi Kebutuhan" required></textarea>
+          <textarea name="pesan" placeholder="Deskripsi Kebutuhan" required></textarea>
           <button type="submit" class="submit-btn">Kirim Permintaan</button>
         </form>
       </div>
@@ -325,5 +348,19 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+      function initMap() {
+        const location = { lat: -6.334798717116168, lng: 106.33059072252344 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 15,
+          center: location,
+        });
+        const marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          title: "Elektrobee"
+        });
+      }
+    </script>
   </body>
 </html>
